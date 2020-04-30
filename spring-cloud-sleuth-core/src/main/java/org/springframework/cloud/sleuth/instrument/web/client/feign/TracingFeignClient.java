@@ -171,13 +171,12 @@ final class TracingFeignClient implements Client {
 
 		Request build() {
 			if (headers == null) {
-				return delegate;
-			}
-			String method = delegate.method();
-			String url = delegate.url();
-			byte[] body = delegate.body();
-			Charset charset = delegate.charset();
-			return Request.create(method, url, headers, body, charset);
+                return delegate;
+            }
+            String url = delegate.url();
+            byte[] body = delegate.body();
+            Charset charset = delegate.charset();
+            return Request.create(delegate.httpMethod(), url, headers, body, charset, delegate.requestTemplate());
 		}
 
 	}
